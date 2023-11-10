@@ -1,12 +1,13 @@
 // includes, defines, global variables 
+#include <Arduino.h>
 #include <Servo.h>
 #include <string.h>
 
-#define LSERVOPIN 3
-#define RSERVOPIN 5
-#define WAITSERVO 10
-#define WAITFORINITSERVO 500
-#define MYTIMEOUT 0
+#define L_SERVO_PIN 3
+#define R_SERVO_PIN 5
+#define WAIT_SERVO 10
+#define WAIT_FOR_INIT_SERVO 500
+#define TIMEOUT 0
 #define BAUDRATE 9600
 
 Servo leftServo;
