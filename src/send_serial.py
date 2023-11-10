@@ -4,7 +4,7 @@ import operator
 import math
 import socket
 import struct
-import receiveData as rc
+import receive_serial as rc
 
 BAUDRATE = 9600
 INITSERVOPOS = 90
