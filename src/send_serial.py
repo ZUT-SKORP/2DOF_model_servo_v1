@@ -1,9 +1,6 @@
 import serial
-import time
-import operator
 import math
 import socket
-import struct
 import receive_serial as rc
 
 BAUDRATE = 9600
