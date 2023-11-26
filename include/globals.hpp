@@ -9,6 +9,9 @@
 #define WAIT_FOR_INIT_SERVO 500
 #define TIMEOUT 0
 #define BAUDRATE 9600
+#define BOTH 'B'
+#define LEFT 'L'
+#define RIGHT 'R'
 
 Servo leftServo;
 Servo rightServo;

@@ -22,18 +22,18 @@ void loop() {
         commandBuffer = Serial.readString();
         int commandLength = commandBuffer.length();
 
-        if (commandLength == 7 && commandBuffer[0] == 'B') {
+        if (commandLength == 7 && commandBuffer[0] == BOTH) {
             leftCommandBuffer = commandBuffer.substring(1, 4);
             rightCommandBuffer = commandBuffer.substring(4, 7);
             leftPos = leftCommandBuffer.toInt();
             rightPos = rightCommandBuffer.toInt();
         }
         else if (commandLength == 4) {
-            if (commandBuffer[0] == 'L') {
+            if (commandBuffer[0] == LEFT) {
                 leftCommandBuffer = commandBuffer.substring(1, 4);
                 leftPos = leftCommandBuffer.toInt();
             } 
-            else if (commandBuffer[0] == 'R') {
+            else if (commandBuffer[0] == RIGHT) {
                 rightCommandBuffer = commandBuffer.substring(1, 4);
                 rightPos = rightCommandBuffer.toInt();
             }
