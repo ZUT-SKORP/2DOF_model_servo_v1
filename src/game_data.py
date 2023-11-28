@@ -1,5 +1,4 @@
 import struct
-import serial
 
 def receiveData(sock) -> float:
 
