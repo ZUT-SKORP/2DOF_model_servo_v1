@@ -3,6 +3,11 @@ import math
 import socket
 import game_data
 
+
+
+HOST = '127.0.0.2'
+PORT = 30000
+COM = 'COM13'
 BAUDRATE = 9600
 INIT_SERVO_POS = 90
 MAX_SERVO_POS = 180
@@ -11,15 +16,15 @@ ROLL_INTENSITY = 500
 BOTH = 'B'
 LEFT = 'L'
 RIGHT = 'R'
-HOST = '127.0.0.2'
-PORT = 30000
+
+
 
 if __name__ == '__main__':
     # Create UDP socket.
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     # Bind to LFS.
     sock.bind((HOST, PORT))
-    ser = serial.Serial('COM13', BAUDRATE)
+    ser = serial.Serial(COM, BAUDRATE)
     
     while True:
         command = 'B'
