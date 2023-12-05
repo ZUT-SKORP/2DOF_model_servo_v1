@@ -5,15 +5,15 @@
 
 
 
-#define L_SERVO_PIN 3
-#define R_SERVO_PIN 5
-#define WAIT_SERVO 10
-#define WAIT_FOR_INIT_SERVO 500
-#define TIMEOUT 0
-#define BAUDRATE 9600
-#define BOTH 'B'
-#define LEFT 'L'
-#define RIGHT 'R'
+const uint8_t L_SERVO_PIN = 3;
+const uint8_t R_SERVO_PIN = 5;
+const uint8_t WAIT_SERVO = 10;
+const uint16_t WAIT_FOR_INIT_SERVO = 500;
+const uint8_t TIMEOUT = 0;
+const uint16_t BAUDRATE = 9600;
+const char BOTH = 'B';
+const char LEFT = 'L';
+const char RIGHT = 'R';
 
 
 
