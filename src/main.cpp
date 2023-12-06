@@ -2,8 +2,7 @@
 
 uint8_t cmdBuff[CMD_LEN+1], reCmdBuff[CMD_LEN+1];
 uint8_t ctrlByte1, ctrlByte2; // control bytes
-String lCmdBuff;
-String rCmdBuff;
+uint8_t lPosBuff, rPosBuff;
 
 void setup() {
     Serial.begin(BAUDRATE);
@@ -20,37 +19,29 @@ void setup() {
 
 void loop() {
     if (Serial.available()) {
-        // ! przetestowac czy dziala z wartosciami >127 i czy da sie to jakos upiekszyc
+        // TODO przetestowac czy dziala z wartosciami >127 i <=127
         reCmdBuff = reinterpret_cast<char*>(cmdBuff);
         Serial.readBytes(reCmdBuff, CMD_LEN);
-        Serial.println(reCmdBuff);
         ctrlByte1 = (uint8_t)reCmdBuff[0] - '0';
         ctrlByte2 = (uint8_t)reCmdBuff[strlen(reCmdBuff)-1] - '0';
+
         if (ctrlByte1 == 1 && ctrlByte2 == 0) {
-            memmove(cmdBuff, cmdBuff + 1, strlen(reCmdBuff));
-            cmdBuff[strlen(reCmdBuff)-1] = '\0';
-            Serial.println(reCmdBuff);
+            memmove(reCmdBuff, reCmdBuff + 1, strlen(reCmdBuff));
+            reCmdBuff[strlen(reCmdBuff)-1] = '\0';
         }
 
-        // if (commandLength == 7 && cmdBuff[0] == BOTH) {
-        //     lCmdBuff = cmdBuff.substring(1, 4);
-        //     rCmdBuff = cmdBuff.substring(4, 7);
-        //     leftPos = lCmdBuff.toInt();
-        //     rightPos = rCmdBuff.toInt();
-        // }
-        // else if (commandLength == 4) {
-        //     if (cmdBuff[0] == LEFT) {
-        //         lCmdBuff = cmdBuff.substring(1, 4);
-        //         leftPos = lCmdBuff.toInt();
-        //     } 
-        //     else if (cmdBuff[0] == RIGHT) {
-        //         rCmdBuff = cmdBuff.substring(1, 4);
-        //         rightPos = rCmdBuff.toInt();
-        //     }
-        // }
+        if (strlen(reCmdBuff) == 2) {
+            lPosBuff = (uint8_t)reCmdBuff[0] - '0';
+            rPosBuff = (uint8_t)reCmdBuff[1] - '0';
+            if (lPosBuff <= 180 && rPosBuff <= 180) {
+                lPos = lPosBuff;
+                rPos = rPosBuff;
+            }   
+        }
+        
+        leftServo.write(leftPos);
+        rightServo.write(rightPos);    
 
-        // leftServo.write(leftPos);
-        // rightServo.write(rightPos);
         Serial.flush();
     }
 }

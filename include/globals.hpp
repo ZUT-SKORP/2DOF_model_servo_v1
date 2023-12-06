@@ -18,8 +18,8 @@ const char RIGHT = 'R';
 
 
 
-Servo leftServo;
-Servo rightServo;
+Servo lServo;
+Servo rServo;
 
-int leftPos = 0;
-int rightPos = 0;
+int lPos = 0;
+int rPos = 0;
