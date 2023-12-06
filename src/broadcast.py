@@ -48,13 +48,8 @@ if __name__ == '__main__':
         if leftServoPos > MAX_SERVO_POS: leftServoPos = MAX_SERVO_POS
         if rightServoPos > MAX_SERVO_POS: rightServoPos = MAX_SERVO_POS
         
-        if leftServoPos < 10:     command += f'00{leftServoPos}'
-        elif leftServoPos < 100:  command += f'0{leftServoPos}'
-        elif leftServoPos >= 100: command += f'{leftServoPos}'
-
-        if rightServoPos < 10:     command += f'00{rightServoPos}'
-        elif rightServoPos < 100:  command += f'0{rightServoPos}'
-        elif rightServoPos >= 100: command += f'{rightServoPos}'
+        # preaparing bytes for broadcast
+        command = chr(1) + chr(leftServoPos) + chr(rightServoPos)
         
         print(command)
         
