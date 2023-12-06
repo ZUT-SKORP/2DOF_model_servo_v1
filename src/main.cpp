@@ -1,6 +1,6 @@
 #include "globals.hpp"
 
-uint8_t cmdBuff[CMD_LEN+1];
+uint8_t cmdBuff[CMD_LEN+1], reCmdBuff[CMD_LEN+1];
 uint8_t ctrlByte1, ctrlByte2; // control bytes
 String lCmdBuff;
 String rCmdBuff;
@@ -21,14 +21,15 @@ void setup() {
 void loop() {
     if (Serial.available()) {
         // ! przetestowac czy dziala z wartosciami >127 i czy da sie to jakos upiekszyc
-        Serial.readBytes(reinterpret_cast<char*>(cmdBuff), CMD_LEN);
-        Serial.println(reinterpret_cast<char*>(cmdBuff));
-        ctrlByte1 = (uint8_t)cmdBuff[0] - '0';
-        ctrlByte2 = (uint8_t)cmdBuff[strlen(reinterpret_cast<char*>(cmdBuff))-1] - '0';
+        reCmdBuff = reinterpret_cast<char*>(cmdBuff);
+        Serial.readBytes(reCmdBuff, CMD_LEN);
+        Serial.println(reCmdBuff);
+        ctrlByte1 = (uint8_t)reCmdBuff[0] - '0';
+        ctrlByte2 = (uint8_t)reCmdBuff[strlen(reCmdBuff)-1] - '0';
         if (ctrlByte1 == 1 && ctrlByte2 == 0) {
-            memmove(cmdBuff, cmdBuff + 1, strlen(reinterpret_cast<char*>(cmdBuff)));
-            cmdBuff[strlen(reinterpret_cast<char*>(cmdBuff))-1] = '\0';
-            Serial.println(reinterpret_cast<char*>(cmdBuff));
+            memmove(cmdBuff, cmdBuff + 1, strlen(reCmdBuff));
+            cmdBuff[strlen(reCmdBuff)-1] = '\0';
+            Serial.println(reCmdBuff);
         }
 
         // if (commandLength == 7 && cmdBuff[0] == BOTH) {
